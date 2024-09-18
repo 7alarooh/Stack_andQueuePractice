@@ -1,5 +1,7 @@
-﻿using System.Collections;
-using System.Linq.Expressions;
+﻿
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Stack_andQueuePractice
 {
@@ -73,6 +75,23 @@ namespace Stack_andQueuePractice
 
             int result = (int)S2.Pop();
             Console.WriteLine(result);
+
+
+
+            //            Task 2: Reverse a String Using a Stack
+            //Write a program that takes a string as input and uses a stack to reverse it.Print the reversed string.
+            //Example Input: Input: "hello" Example Output: Output: "olleh"
+            Stack<char> reverse = new Stack<char>();
+            Console.WriteLine("type any text to Reverse: ");
+            string word=Console.ReadLine();
+            foreach (char l in word) {
+                reverse.Push(l);
+            }
+            while (reverse.Count > 0)
+            {
+                Console.Write(reverse.Pop());
+            }
+
 
         }
     }
