@@ -15,6 +15,9 @@ namespace Stack_andQueuePractice
     {
         static void Main(string[] args)
         {
+            ////////////////////////////////////
+            ///////////1. Stack /////////
+            ////////////////////////////////////
 
             //Task 1: Evaluate Postfix Expression
             //Write a program that evaluates a mathematical expression in postfix notation(also known as Reverse Polish
@@ -243,6 +246,44 @@ namespace Stack_andQueuePractice
             {
                 Console.Write(sortNum.Pop() + " ");
             }
+            ////////////////////////////////////
+            ///////////2.  Queue////////////////
+            ////////////////////////////////////
+
+            //            Task 1: Reverse a Queue
+            //Write a function that takes a queue of integers as input and reverses the order of its elements.You should
+            //only use the queue's basic operations (Enqueue, Dequeue) and an auxiliary stack.
+            //Example Input:
+            //• Queue: 1, 2, 3, 4, 5
+            //Example Output:
+            //• Reversed Queue: 5, 4, 3, 2, 1
+
+            Console.WriteLine("\n\n Reverse a Queue");
+            Queue<int> Q1 = new Queue<int>();
+            Stack<int> tempQueue = new Stack<int>();
+            Console.WriteLine("\n\n Type number of digits ,you will Enter:");
+            int no = int.Parse(Console.ReadLine());
+            for (int i = 0; i < no; i++)
+            {
+                Console.WriteLine($" enter digit ({i + 1}):");
+                int number = int.Parse(Console.ReadLine());
+                Q1.Enqueue(number);
+            }
+
+
+            while (Q1.Count > 0)
+            {
+                tempQueue.Push(Q1.Dequeue());
+            }
+            while (tempQueue.Count > 0)
+            {
+                Q1.Enqueue(tempQueue.Pop());
+            }
+            foreach (int i in Q1) {
+                
+               Console.Write( i +" ");
+            }
+
 
 
         }
