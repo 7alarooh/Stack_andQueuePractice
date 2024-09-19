@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Stack_andQueuePractice
 {
@@ -47,32 +49,28 @@ namespace Stack_andQueuePractice
                             n1 = (int)S2.Pop();
                             n2 = (int)S2.Pop();
                             S2.Push(n1 + n2);
-
-
                         }
                         if (op == '-')
                         {
                             n1 = (int)S2.Pop();
                             n2 = (int)S2.Pop();
-                            S2.Push(n1 - n2);
-
-
+                            if (n1 > n2)
+                            {
+                                S2.Push(n1 - n2);
+                            }
+                            else { S2.Push(n2 - n1); }
                         }
                         if (op == '*')
                         {
                             n1 = (int)S2.Pop();
                             n2 = (int)S2.Pop();
                             S2.Push(n1 * n2);
-
-
                         }
                         if (op == '/')
                         {
                             n1 = (int)S2.Pop();
                             n2 = (int)S2.Pop();
-                            S2.Push(n1 + n2);
-
-
+                            S2.Push(n1 / n2);
                         }
                     } }
             }
@@ -152,6 +150,32 @@ namespace Stack_andQueuePractice
             {
                 Console.WriteLine("The parentheses are not balanced.");
             }
+
+            //            Task 4: Find the Maximum Element in a Stack
+            //Write a program that uses a stack to store integers. Implement a function Max() that returns the maximum value in
+            //the stack at any given time, in addition to the basic stack operations Push() and Pop().
+
+            Console.WriteLine("\n\n Find the Maximum Element in a Stack");
+
+            Stack<int> numbers = new Stack<int>();
+            Console.WriteLine("\n\n enter number of digits ,you will type:");
+            int numberDigits=int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < numberDigits; i++) {
+
+                Console.WriteLine($" enter digit{i+1}:");
+                int number=int.Parse(Console.ReadLine());
+                numbers.Push(number);
+            }
+            Console.Write("\n The Maximum number in a Stack :");
+            int maxnumber = 0;
+            foreach (int n in numbers) 
+            {
+                if(n> maxnumber)
+                    maxnumber = n;
+            }
+            Console.Write(maxnumber);
+
 
         }
     }
