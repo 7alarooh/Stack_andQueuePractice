@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -21,7 +22,7 @@ namespace Stack_andQueuePractice
             //expression.
             Stack S1 = new Stack();
             Console.WriteLine("to give solve this:\"5 1 2 + 4 * + 3 -\" by using Evaluate Postfix Expression");
-           // S1.Push("5 1 2 + 4 * + 3 -");
+            // S1.Push("5 1 2 + 4 * + 3 -");
             S1.Push('-');
             S1.Push(3);
             S1.Push('+');
@@ -36,13 +37,15 @@ namespace Stack_andQueuePractice
             int n1, n2;
             foreach (var x in S1)
             {
-               // var TopItem = S1.Peek();
+                // var TopItem = S1.Peek();
                 if (x is int)
                 {
                     //S1.Pop();
                     S2.Push(x);
                 }
-                else { if (x is char op) 
+                else
+                {
+                    if (x is char op)
                     {
                         if (op == '+')
                         {
@@ -72,7 +75,8 @@ namespace Stack_andQueuePractice
                             n2 = (int)S2.Pop();
                             S2.Push(n1 / n2);
                         }
-                    } }
+                    }
+                }
             }
 
             int result = (int)S2.Pop();
@@ -86,8 +90,9 @@ namespace Stack_andQueuePractice
             Console.WriteLine("Reverse a String Using a Stack");
             Stack<char> reverse = new Stack<char>();
             Console.WriteLine("type any text to Reverse: ");
-            string word=Console.ReadLine();
-            foreach (char l in word) {
+            string word = Console.ReadLine();
+            foreach (char l in word)
+            {
                 reverse.Push(l);
             }
             while (reverse.Count > 0)
@@ -158,23 +163,86 @@ namespace Stack_andQueuePractice
             Console.WriteLine("\n\n Find the Maximum Element in a Stack");
 
             Stack<int> numbers = new Stack<int>();
-            Console.WriteLine("\n\n enter number of digits ,you will type:");
-            int numberDigits=int.Parse(Console.ReadLine());
+            Console.WriteLine("\n\n Type number of digits ,you will Enter:");
+            int numberDigits = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < numberDigits; i++) {
+            for (int i = 0; i < numberDigits; i++)
+            {
 
-                Console.WriteLine($" enter digit{i+1}:");
-                int number=int.Parse(Console.ReadLine());
+                Console.WriteLine($" enter digit ({i + 1}):");
+                int number = int.Parse(Console.ReadLine());
                 numbers.Push(number);
             }
             Console.Write("\n The Maximum number in a Stack :");
             int maxnumber = 0;
-            foreach (int n in numbers) 
+            foreach (int n in numbers)
             {
-                if(n> maxnumber)
+                if (n > maxnumber)
                     maxnumber = n;
             }
             Console.Write(maxnumber);
+
+            //        Bonus: Sort a Stack Using Another Stack
+            //Given a stack, write a function to sort the elements in ascending order using only one additional stack. You may
+            //use additional variables but you are not allowed to use arrays or other data structures.
+            Console.WriteLine("\n\n Sort a Stack Using Another Stack");
+            Stack<int> sortNum = new Stack<int>();
+            Console.WriteLine("\n\n Type number of digits ,you will Enter:");
+            int numDigits = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < numDigits; i++)
+            {
+                Console.WriteLine($" enter digit ({i + 1}):");
+                int number = int.Parse(Console.ReadLine());
+                sortNum.Push(number);
+            }
+            Stack<int> sortNum1 = new Stack<int>();
+            while (sortNum.Count > 0)
+            {
+                int maxToAdd = int.MinValue; // Initialize to the smallest possible integer
+                Stack<int> tempStack = new Stack<int>(); // Temporary stack to hold elements during the search for max
+
+                // Find the maximum element in sortNum
+                while (sortNum.Count > 0)
+                {
+                    int current = sortNum.Pop();
+
+                    // Check if the current element is the maximum found so far
+                    if (current > maxToAdd)
+                    {
+                        maxToAdd = current;
+                    }
+
+                    // Push current element to tempStack
+                    tempStack.Push(current);
+                }
+
+                // Push elements back to sortNum, except for the maximum element
+                bool maxPushed = false; // To ensure only one instance of max is removed
+                while (tempStack.Count > 0)
+                {
+                    int tempValue = tempStack.Pop();
+
+                    // Skip pushing the maximum element once
+                    if (tempValue == maxToAdd && !maxPushed)
+                    {
+                        maxPushed = true; // Mark max as pushed
+                        continue; // Skip this element
+                    }
+
+                    sortNum.Push(tempValue);
+                }
+
+                // Push the maximum element to the sorted stack
+                sortNum1.Push(maxToAdd);
+            }
+
+            // Output the sorted stack
+            Console.WriteLine("\nSorted stack in ascending order:");
+            while (sortNum1.Count > 0)
+            {
+                Console.Write(sortNum1.Pop() + " ");
+            }
 
 
         }
