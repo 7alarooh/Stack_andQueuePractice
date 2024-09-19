@@ -196,24 +196,23 @@ namespace Stack_andQueuePractice
                 int number = int.Parse(Console.ReadLine());
                 sortNum.Push(number);
             }
-            Stack<int> sortNum1 = new Stack<int>();
-            while (sortNum.Count > 0)
+            int count= 0;
+            int maxToAdd ;
+            while (count< numDigits)
             {
-                int maxToAdd = int.MinValue; // Initialize to the smallest possible integer
+                maxToAdd=int.MinValue;
                 Stack<int> tempStack = new Stack<int>(); // Temporary stack to hold elements during the search for max
 
                 // Find the maximum element in sortNum
-                while (sortNum.Count > 0)
+                while (sortNum.Count > count)
                 {
                     int current = sortNum.Pop();
 
-                    // Check if the current element is the maximum found so far
                     if (current > maxToAdd)
                     {
                         maxToAdd = current;
                     }
 
-                    // Push current element to tempStack
                     tempStack.Push(current);
                 }
 
@@ -234,14 +233,15 @@ namespace Stack_andQueuePractice
                 }
 
                 // Push the maximum element to the sorted stack
-                sortNum1.Push(maxToAdd);
+                sortNum.Push(maxToAdd);
+                count++;
             }
 
             // Output the sorted stack
             Console.WriteLine("\nSorted stack in ascending order:");
-            while (sortNum1.Count > 0)
+            while (sortNum.Count > 0)
             {
-                Console.Write(sortNum1.Pop() + " ");
+                Console.Write(sortNum.Pop() + " ");
             }
 
 
