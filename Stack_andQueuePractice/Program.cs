@@ -2,6 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Stack_andQueuePractice
 {
@@ -92,6 +95,40 @@ namespace Stack_andQueuePractice
                 Console.Write(reverse.Pop());
             }
 
+
+
+            //            Task 3: Check for Balanced Parentheses
+            //Write a program to check whether a string of parentheses is balanced.Use a stack to solve this problem.You need
+            //to ensure that for every opening parenthesis(, there is a corresponding closing parenthesis).
+            //Example Input:
+            //• Input: "(())"
+            //Example Output:
+            //• Output: Balanced
+            //Example Input:
+            //• Input: "(()"
+            //Example Output:
+            //• Output: Not Balanced
+
+            Stack<char> reverseText = new Stack<char>();
+            Console.WriteLine("type any text to Reverse: ");
+            string Input = Console.ReadLine();
+            bool isBalanced = true;
+
+            //foreach (char ch in Input)
+            //{
+            //    if (ch == '(')
+            //    {
+            //        // Push opening parentheses to the stack
+            //        reverseText.Push(ch);
+            //    }
+            //    else if (ch == ')')
+            //    {
+            //        // If stack is empty, it means there's no matching opening parenthesis
+            //        if (reverseText.Count == 0)
+            //        {
+            //            isBalanced = false;
+            //            break;
+            //        }
 
         }
     }
