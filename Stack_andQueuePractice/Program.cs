@@ -3,7 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics.X86;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Formats.Asn1.AsnWriter;
@@ -284,7 +287,84 @@ namespace Stack_andQueuePractice
                Console.Write( i +" ");
             }
 
+            //            Task 2: Check if a Queue is a Palindrome
+            //Write a function that checks whether a queue is a palindrome. A palindrome is a sequence that reads the
+            //same backward as forward.You can only use queue operations(Enqueue, Dequeue) and a stack to help with
+            //the check.
+            //Example Input:
+            //• Queue: 1, 2, 3, 2, 1
+            //Example Output:
+            //• Output: True
+            Console.WriteLine("\n\n Check if a Queue is a Palindrome");
+            Queue<int> Q2 = new Queue<int>();
+            Stack<int> CheckQueue = new Stack<int>();
+            Console.WriteLine("\n\n Type number of digits ,you will Enter:");
+            int numnum = int.Parse(Console.ReadLine());
+            for (int i = 0; i < numnum; i++)
+            {
+                Console.WriteLine($" enter digit ({i + 1}):");
+                int number = int.Parse(Console.ReadLine());
+                Q1.Enqueue(number);
+            }
 
+            foreach (int num in Q2)
+            {
+                CheckQueue.Push(num);
+            }
+
+            // Check if the queue is a palindrome
+            bool test = true;
+            foreach (int num in Q2)
+            {
+                if (num != CheckQueue.Pop())
+                {
+                    test = false;
+                    break;
+                }
+            }
+
+            Console.WriteLine(test);
+
+
+            //        Bonus: Find the Maximum Element in a Sliding Window of Size K
+            //Write a program that processes an array of integers and finds the maximum element in each sliding window of
+            //size K. Use a deque to efficiently solve the problem.
+            //Example Input:
+            //• Array: [1, 3, -1, -3, 5, 3, 6, 7]
+            //• K = 3
+            //Example Output:
+            //• Output: [3, 3, 5, 5, 6, 7]
+            Console.WriteLine("\n\n Find the Maximum Element in a Sliding Window of Size K");
+            Queue<int> Array = new Queue<int>();
+            Queue<int> resultMaxk = new Queue<int>();
+            Console.WriteLine("\n\n Type number of digits ,you will Enter:");
+            int numnum1 = int.Parse(Console.ReadLine());
+            for (int i = 0; i < numnum1; i++)
+            {
+                Console.WriteLine($" enter digit ({i + 1}):");
+                int number = int.Parse(Console.ReadLine());
+                Array.Enqueue(number);
+            }
+
+            while (Array.Count > 0)
+            { if (Array.Count < 3)
+                {
+                    int maxnn;
+                    int nn1 = Array.Dequeue();
+                    int nn2 = Array.Dequeue();
+                    int nn3 = Array.Dequeue();
+                    if (nn1 > nn2) { if (nn1 > 3) maxnn = nn1; else maxnn = nn3; }
+                    else if (nn2 > nn3) { maxnn = nn2; } else { maxnn = nn3; }
+                    resultMaxk.Enqueue(maxnn);
+                    Array.Enqueue((int)nn2);
+                    Array.Enqueue((int)nn3);
+                }
+            }
+            foreach (int i in resultMaxk)
+            {
+
+                Console.Write(i + " ");
+            }
 
         }
     }
